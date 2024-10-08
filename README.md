@@ -1,2 +1,2 @@
-# repo-xmake
+# Repo Xmake
 My own xmake repo
