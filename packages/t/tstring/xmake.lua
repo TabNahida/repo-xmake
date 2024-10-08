@@ -4,7 +4,7 @@ package("tstring")
     set_description("TString is a custom C++ string implementation designed for efficient memory management.")
 
     add_urls("https://github.com/yourusername/TString/archive/refs/tags/$(version).tar.gz")
-    add_versions("v1.0-Alpha", "44e79eb0787b19e433ef928d5d228bf299e05d20b6dbe38696694b33b5b5511c")
+    add_versions("v1.0-Gamma", "75b65812fb8aae016509bc91427043fc900e58c8243bb348b8ad016c6e18ede3")
 
     add_includedirs("include", {public = true})
 
