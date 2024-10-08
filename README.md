@@ -5,9 +5,9 @@ My own xmake repo
 
 Run this command on your shell
 ```sh
-xmake repo --add tab-repo git@github.com:TabNahida/repo-xmake.git
+xmake repo --add tab-repo https://github.com/TabNahida/repo-xmake.git
 ```
 or Add this line to your xmake.lua
 ```lua
-add_repositories("tab-repo git@github.com:TabNahida/repo-xmake.git")
+add_repositories("tab-repo https://github.com/TabNahida/repo-xmake.git")
 ```
