@@ -5,7 +5,7 @@ package("tstring")
 
     add_urls("https://github.com/yourusername/TString/archive/refs/tags/$(version).tar.gz")
     add_versions("v1.0-Delta", "c55552e7c8347cc179f54788a7a52f15554af8caeb925647a6e8dda7993939b0")
-    add_versions("v1.0-Epsilon", "cb3b6ed597422da2e5166ea4a388b631d4d640372c520d3f7e74a04d9b7235e5")
+    add_versions("v1.0-Zeta", "9eb3e77770ea308a953aa3979a700a73626abbde79a774d4ed376e2e2134320a")
 
     add_includedirs("include", {public = true})
 
