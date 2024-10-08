@@ -16,6 +16,7 @@ package("tstring")
         assert(package:has_cxxtypes("TString", {includes = "TString.hpp"}))
         assert(package:check_cxxsnippets({
             test = [[
+                #include <TString.hpp>
                 void test() {
                     TString str("Hello");
                     str.append(", World!");
@@ -23,4 +24,3 @@ package("tstring")
             ]]
         }, {configs = {languages = "cxx20"}}))
     end)
-package_end()
