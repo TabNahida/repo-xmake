@@ -1,5 +1,4 @@
 package("tstring")
-    set_kind("library")
     set_homepage("https://github.com/yourusername/TString")
     set_description("TString is a custom C++ string implementation designed for efficient memory management.")
 
