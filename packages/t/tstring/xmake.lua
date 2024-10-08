@@ -6,6 +6,7 @@ package("tstring")
     add_urls("https://github.com/yourusername/TString/archive/refs/tags/$(version).tar.gz")
     add_versions("v0.1.4", "d98cd8e4ad186ffb9c53a0320edcda667406f1b88e5ce912467aca44b8b50da9")
     add_versions("v0.1.6", "e8ef1b6f426943d8b7c9c42e192b507cf2f14eff7ca4c825204b75970b1f4cf8")
+    add_versions("v0.1.7", "db7e713da560aff0832d88b44f56c5a86187574287ecf693076da192912da46f")
 
     add_includedirs("include", {public = true})
 
