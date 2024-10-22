@@ -32,4 +32,3 @@ package("tstring")
             ]]
         }, {configs = {languages = "cxx20"}}))
     end)
-package_end()
