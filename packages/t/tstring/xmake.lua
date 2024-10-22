@@ -1,4 +1,5 @@
 package("tstring")
+    add_versions("v0.1.16", "3c43d5ce40fabe349be57af6abeea2d1d25adb88c02da7bf7abbf28627dd99da")
     set_kind("library", {headeronly = true})
     set_homepage("https://github.com/TabNahida/TString")
     set_description("TString is a custom C++ string implementation designed for efficient memory management.")
@@ -14,6 +15,7 @@ package("tstring")
     add_versions("v0.1.14", "2d45726148c2ea209cd1996358d73d3161eb267d7d938155d5b38193067a7d24")
     add_versions("v0.1.15", "d265293550e485d7240f5c5f5b87164838e1c72829a985a905afd5d6fac7b836")
 
+    add_versions("v0.1.16", "3c43d5ce40fabe349be57af6abeea2d1d25adb88c02da7bf7abbf28627dd99da")
     add_includedirs("include", {public = true})
 
     on_install(function (package)
