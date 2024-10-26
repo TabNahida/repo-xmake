@@ -5,7 +5,7 @@ package("tcstring")
 
     add_urls("https://github.com/TabNahida/TCString/archive/refs/tags/$(version).tar.gz",
              "https://github.com/TabNahida/TCString.git")
-    add_versions("v0.1.0", "14d81d1bacbedf65423d84082fae7af6fc009d801a1c1e63ed5530d249de2015")
+    add_versions("v0.1.0", "5a436379fe52d1652d8582946f7d575ad64617cf56c5c3f6644a3113e362dec7")
 
     add_includedirs("include", {public = true})
 
