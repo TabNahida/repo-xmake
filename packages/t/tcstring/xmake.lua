@@ -14,8 +14,8 @@ package("tcstring")
     end)
 
     on_test(function (package)
-        assert(package:has_cxxtypes("TCString", {includes = "TCString.h"}))
-        assert(package:check_cxxsnippets({
+        assert(package:has_ctypes("TCString", {includes = "TCString.h"}))
+        assert(package:check_csnippets({
             test = [[
                 #include <TCString.h>
                 void test() {
