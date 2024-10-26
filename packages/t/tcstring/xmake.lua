@@ -19,8 +19,8 @@ package("tcstring")
             test = [[
                 #include <TCString.h>
                 void test() {
-                    TString str("Hello");
-                    str.append(", World!");
+                    TCString(str, "Hello");
+                    appendTCString(str, ", World!");
                 }
             ]]
         }, {configs = {languages = "c17"}}))
