@@ -16,6 +16,7 @@ package("tstring")
     add_versions("v0.1.16", "dbd508690822cde7161fee83bc05abbf9281f96e3501e1cab515022139e043b2")
     add_versions("v0.1.17", "2eef4a33be3ba37525de7379f18b5b8fa3f409184a1176e7ef7321002e7e52af")
     add_versions("v0.1.18", "27853503731d807f2bf53cc458c3f0c02d1a5a1f2492148a5fc33ab07a5d43d4")
+    add_versions("v0.1.19", "5a919b9ec83929e5691bcf708600a7d0959b4362d50aa8291f1debeea737996c")
 
     add_includedirs("include", {public = true})
 
