@@ -10,6 +10,7 @@ package("tcstring")
     add_versions("v0.1.2", "485200123ef5c32161807eca91959f8d60b20668a72eee1350d5385266a5fb4b")
     add_versions("v0.1.3", "a8e308bc7ae947ac3f861f7847638e961361224ee6ee01cb30121e94d8bd38ac")
     add_versions("v0.1.4", "0e5ed7d5611df71802b35421adf76f9d3cb53bbf83319d94bbedee1307931137")
+    add_versions("v0.1.5", "75b9909f97354e3d91773d8916237e19de39e75ae98e6645c5e1103693a66c29")
 
     add_includedirs("include", {public = true})
 
