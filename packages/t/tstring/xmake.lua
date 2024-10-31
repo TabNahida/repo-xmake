@@ -21,6 +21,19 @@ package("tstring")
 
     add_includedirs("include", {public = true})
 
+    add_configs("tcstring", {default = true, description = "Enable TCString Support"})
+    add_configs("stl", {default = true, description = "Enable STL Functions Support"})
+
+    on_load(function (package)
+        if package:config("tcstring") then
+            package:add("defines", "TCSTRING_SUPPORT")
+            package:add("deps", "tcstring >0.1.3")
+        end
+        if package:config("stl") then
+            package:add("defines", "STL_SUPPORT")
+        end
+    end)
+
     on_install(function (package)
         import("package.tools.xmake").install(package)
     end)
