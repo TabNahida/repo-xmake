@@ -48,5 +48,5 @@ package("tstring")
                     str.append(", World!");
                 }
             ]]
-        }, {configs = {languages = "cxx20"}}))
+        }, {configs = {languages = "c++20"}}))
     end)
