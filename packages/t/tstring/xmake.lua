@@ -48,5 +48,5 @@ package("tstring")
                     str.append(", World!");
                 }
             ]]
-        }, {configs = {languages = "c++20"}}))
+        }, {configs = {languages = "c++20"}, includes = "TString.hpp"}}))
     end)
