@@ -6,6 +6,7 @@ package("pace")
     add_urls("https://github.com/TabNahida/PACE/archive/refs/tags/v$(version).tar.gz",
              "https://github.com/TabNahida/PACE.git")
     add_versions("0.1.0", "38ff58ebb3a3d529d720a102238fc8c03c16123998130effe96ba6528210f8a9")
+    add_versions("0.1.1", "2311af9f7c67c75fc83ad923a996924b93e640dfba6665cf2a8c62aea3d6de80")
 
     add_configs("shared", {description = "Build shared libraries.", default = false, type = "boolean", readonly = true})
     add_configs("http1", {description = "Enable HTTP/1.0 and HTTP/1.1.", default = true, type = "boolean"})
