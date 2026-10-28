@@ -5,6 +5,7 @@ package("pace")
 
     add_urls("https://github.com/TabNahida/PACE/archive/refs/tags/v$(version).tar.gz",
              "https://github.com/TabNahida/PACE.git")
+    add_versions("0.3.1", "8688313d3051cfa9f034ae1ec34d0def94677754fb4336ccf7881ebfa3b95d39")
     add_versions("0.3.0", "b55a2ffeb917295159de7c8e753a7c8735a51a3ab7429612dde1a0f5b526a831")
     add_versions("0.1.0", "38ff58ebb3a3d529d720a102238fc8c03c16123998130effe96ba6528210f8a9")
     add_versions("0.1.1", "2311af9f7c67c75fc83ad923a996924b93e640dfba6665cf2a8c62aea3d6de80")
@@ -82,7 +83,7 @@ package("pace")
                 pace::io_context io;
                 pace::tcp::stream socket(io);
             #ifdef PACE_HAS_HTTP1
-                auto request = pace::http::get(io, {"127.0.0.1", 8080});
+                auto request = pace::http::get(io, pace::tcp::endpoint{"127.0.0.1", 8080});
             #endif
             #ifdef PACE_HAS_WEBSOCKET
                 pace::websocket::stream websocket(std::move(socket), pace::websocket::role::client);
