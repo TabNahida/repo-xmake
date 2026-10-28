@@ -5,6 +5,7 @@ package("pace")
 
     add_urls("https://github.com/TabNahida/PACE/archive/refs/tags/v$(version).tar.gz",
              "https://github.com/TabNahida/PACE.git")
+    add_versions("0.4.0", "46957eec8edaecc1d0806810f9114a8bfd3af685dad44018579288151afbeed6")
     add_versions("0.3.1", "8688313d3051cfa9f034ae1ec34d0def94677754fb4336ccf7881ebfa3b95d39")
     add_versions("0.3.0", "b55a2ffeb917295159de7c8e753a7c8735a51a3ab7429612dde1a0f5b526a831")
     add_versions("0.1.0", "38ff58ebb3a3d529d720a102238fc8c03c16123998130effe96ba6528210f8a9")
@@ -77,13 +78,14 @@ package("pace")
     end)
 
     on_test(function (package)
-        assert(package:check_cxxsnippets({test = [[
+        local prefix = (not package:version() or package:version():ge("0.4.0")) and "async_" or ""
+        assert(package:check_cxxsnippets({test = ([[
             #include <pace/pace.hpp>
             void test() {
                 pace::io_context io;
                 pace::tcp::stream socket(io);
             #ifdef PACE_HAS_HTTP1
-                auto request = pace::http::get(io, pace::tcp::endpoint{"127.0.0.1", 8080});
+                auto request = pace::http::%sget(io, pace::tcp::endpoint{"127.0.0.1", 8080});
             #endif
             #ifdef PACE_HAS_WEBSOCKET
                 pace::websocket::stream websocket(std::move(socket), pace::websocket::role::client);
@@ -98,11 +100,11 @@ package("pace")
                 pace::quic::context quic;
             #endif
             #ifdef PACE_HAS_HTTP2
-                auto http2 = pace::http2::exchange(pace::tcp::stream(io), "localhost", {});
+                auto http2 = pace::http2::%sexchange(pace::tcp::stream(io), "localhost", {});
             #endif
             #ifdef PACE_HAS_HTTP3
-                auto http3 = pace::http3::exchange(pace::quic::connection(io, quic), "localhost", {});
+                auto http3 = pace::http3::%sexchange(pace::quic::connection(io, quic), "localhost", {});
             #endif
             }
-        ]]}, {configs = {languages = "c++20"}}))
+        ]]):format(prefix, prefix, prefix)}, {configs = {languages = "c++20"}}))
     end)
