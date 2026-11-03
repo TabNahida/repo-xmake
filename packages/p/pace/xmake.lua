@@ -5,6 +5,7 @@ package("pace")
 
     add_urls("https://github.com/TabNahida/PACE/archive/refs/tags/v$(version).tar.gz",
              "https://github.com/TabNahida/PACE.git")
+    add_versions("0.5.0", "cb5e24bb2fbf0667d5783afa46b9ede52f6dcbf74fb4920551eca0732126423b")
     add_versions("0.4.0", "46957eec8edaecc1d0806810f9114a8bfd3af685dad44018579288151afbeed6")
     add_versions("0.3.1", "8688313d3051cfa9f034ae1ec34d0def94677754fb4336ccf7881ebfa3b95d39")
     add_versions("0.3.0", "b55a2ffeb917295159de7c8e753a7c8735a51a3ab7429612dde1a0f5b526a831")
@@ -19,9 +20,16 @@ package("pace")
     add_configs("quic", {description = "Enable QUIC (POSIX only).", default = false, type = "boolean"})
     add_configs("http2", {description = "Enable HTTP/2 with nghttp2.", default = false, type = "boolean"})
     add_configs("http3", {description = "Enable HTTP/3 and QUIC (POSIX only).", default = false, type = "boolean"})
+    add_configs("uring", {description = "Enable the Linux io_uring readiness backend (PACE >= 0.5.0).", default = false, type = "boolean"})
     add_configs("profiling", {description = "Enable intrusive per-thread stage timings.", default = false, type = "boolean"})
 
     on_load(function (package)
+        if package:config("uring") then
+            assert(package:is_plat("linux") and (not package:version() or package:version():ge("0.5.0")),
+                   "package(pace): uring requires Linux and PACE >= 0.5.0")
+            package:add("deps", "liburing 2.12")
+            package:add("defines", "PACE_HAS_IO_URING")
+        end
         local quic = package:config("quic") or package:config("http3")
         if quic and package:is_plat("windows", "mingw") then
             raise("PACE QUIC/HTTP3 currently require a POSIX platform")
@@ -74,10 +82,15 @@ package("pace")
         for _, name in ipairs({"http1", "websocket", "tls", "dns", "quic", "http2", "http3", "profiling"}) do
             configs[name] = package:config(name)
         end
+        if not package:version() or package:version():ge("0.5.0") then
+            configs.uring = package:config("uring")
+        end
         import("package.tools.xmake").install(package, configs)
     end)
 
     on_test(function (package)
+        local gateway = (not package:version() or package:version():ge("0.5.0")) and
+                        'pace::http::reverse_proxy proxy("/api", {"http://127.0.0.1:9000"});' or ""
         local prefix = (not package:version() or package:version():ge("0.4.0")) and "async_" or ""
         assert(package:check_cxxsnippets({test = ([[
             #include <pace/pace.hpp>
@@ -86,6 +99,7 @@ package("pace")
                 pace::tcp::stream socket(io);
             #ifdef PACE_HAS_HTTP1
                 auto request = pace::http::%sget(io, pace::tcp::endpoint{"127.0.0.1", 8080});
+                %s
             #endif
             #ifdef PACE_HAS_WEBSOCKET
                 pace::websocket::stream websocket(std::move(socket), pace::websocket::role::client);
@@ -106,5 +120,5 @@ package("pace")
                 auto http3 = pace::http3::%sexchange(pace::quic::connection(io, quic), "localhost", {});
             #endif
             }
-        ]]):format(prefix, prefix, prefix)}, {configs = {languages = "c++20"}}))
+        ]]):format(prefix, gateway, prefix, prefix)}, {configs = {languages = "c++20"}}))
     end)
